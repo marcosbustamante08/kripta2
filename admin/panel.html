@@ -3,8 +3,9 @@
 <title>Panel | Kripta</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/app.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/config.js"></script>
 <script src="../js/auth.js"></script>
-<script>if (!getSession()) location.replace("login.html");</script>
 </head>
 <body>
 <div class="demo">Web ficticia con fines educativos. Todos los datos son inventados.</div>
@@ -42,15 +43,39 @@
     <h2>Copias de seguridad (solo administradores)</h2>
     <div class="box">
       <p style="margin-top:0">Última exportación completa de clientes y accesos al portal.</p>
-      <a class="btn small" href="../backup/clientes.csv" download>Descargar clientes.csv</a>
     </div>
   </section>
 </main>
 <script>
-const s = getSession();
-if (s) {
-  document.getElementById("who").textContent = s.email + " (" + s.role + ")";
-  if (s.role === "admin") document.getElementById("backups").style.display = "block";
+<script>
+async function protectPanel() {
+
+    // Comprobar si existe una sesión
+    var session = await getSession();
+
+    if (!session) {
+        location.replace("login.html");
+        return;
+    }
+
+    // Comprobar si se ha completado el segundo factor
+    var assurance = await supabaseClient.auth.mfa
+        .getAuthenticatorAssuranceLevel();
+
+    if (assurance.error ||
+        assurance.data.currentLevel !== "aal2") {
+
+        location.replace("login.html");
+        return;
+    }
+
+    // Mostrar información del usuario
+    document.getElementById("who").textContent =
+        session.user.email + " (usuario autenticado)";
+  
 }
+
+protectPanel();
+</script>
 </script>
 </body></html>
