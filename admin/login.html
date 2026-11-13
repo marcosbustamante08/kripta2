@@ -1,31 +1,180 @@
+```html
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Acceso interno | Kripta</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/app.css"></head>
-<body>
-<div class="demo">Web ficticia con fines educativos. Todos los datos son inventados.</div>
-<div class="auth"><div class="card">
-  <div class="logo">Kripta</div>
-  <h1>Acceso interno</h1>
-  <p>Solo personal autorizado.</p>
-  <form id="f">
-    <label for="email">Correo corporativo</label>
-    <input id="email" type="email" autocomplete="username" required>
-    <label for="pw">Contraseña</label>
-    <input id="pw" type="password" autocomplete="current-password" required>
-    <div id="error" role="alert"></div>
-    <button class="btn" type="submit">Entrar</button>
-  </form>
-</div></div>
-<!-- Biblioteca de Supabase -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Acceso interno | Krypta</title>
+
+<link rel="stylesheet" href="../assets/app.css">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- Configuración -->
 <script src="../js/config.js"></script>
-
-<!-- Sistema de autenticación -->
 <script src="../js/auth.js"></script>
+</head>
+
+<body>
+
+<div class="demo">Krypta - Sistema de acceso seguro</div>
+
+<div class="auth">
+<div class="card">
+
+<div class="logo">Krypta</div>
+
+<h1>Acceso interno</h1>
+<p>Identificación segura de usuarios.</p>
+
+<!-- INICIO DE SESIÓN -->
+<form id="loginForm">
+
+<label>Correo electrónico</label>
+<input id="email" type="email" required>
+
+<label>Contraseña</label>
+<input id="pw" type="password" required>
+
+<button class="btn" type="submit">Entrar</button>
+
+</form>
+
+<!-- CONFIGURAR GOOGLE AUTHENTICATOR -->
+<div id="setup" hidden>
+
+<h2>Verificación en dos pasos</h2>
+
+<p>Escanea este código QR con Google Authenticator.</p>
+
+<button class="btn" id="startSetup">Generar código QR</button>
+
+<img id="qr" alt="Código QR de autenticación" style="width:200px;display:none;">
+
+<label>Código de seis cifras</label>
+<input id="setupCode" maxlength="6" inputmode="numeric">
+
+<button class="btn" id="confirmSetup">Confirmar configuración</button>
+
+</div>
+
+<!-- VERIFICAR SEGUNDO FACTOR -->
+<div id="verification" hidden>
+
+<h2>Verificación de identidad</h2>
+
+<p>Introduce el código de Google Authenticator.</p>
+
+<input id="mfaCode" maxlength="6" inputmode="numeric">
+
+<button class="btn" id="verifyButton">Verificar</button>
+
+</div>
+
+<div id="error" role="alert"></div>
+
+</div>
+</div>
+
+<script>
+
+var factorId = null;
+var challengeId = null;
+
+// INICIO DE SESIÓN
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    var email = document.getElementById("email").value.trim();
+    var password = document.getElementById("pw").value;
+
+    var result = await login(email, password);
+
+    if (result.mfaRequired) {
+
+        factorId = result.factorId;
+        challengeId = result.challengeId;
+
+        document.getElementById("loginForm").hidden = true;
+        document.getElementById("verification").hidden = false;
+
+    } else if (result.ok) {
+
+        var factors = await supabaseClient.auth.mfa.listFactors();
+
+        var verified = factors.data.totp.filter(function(f) {
+            return f.status === "verified";
+        });
+
+        if (verified.length === 0) {
+            document.getElementById("loginForm").hidden = true;
+            document.getElementById("setup").hidden = false;
+        } else {
+            location.href = "panel.html";
+        }
+
+    } else {
+
+        document.getElementById("error").textContent =
+            result.error || "No se pudo iniciar sesión.";
+
+    }
+
+});
+
+
+// GENERAR QR
+document.getElementById("startSetup").addEventListener("click", async function() {
+
+    var result = await enrollMFA();
+
+    if (!result.ok) {
+        document.getElementById("error").textContent = result.error;
+        return;
+    }
+
+    factorId = result.factorId;
+
+    var qr = document.getElementById("qr");
+    qr.src = result.qrCode;
+    qr.style.display = "block";
+
+});
+
+
+// CONFIRMAR REGISTRO MFA
+document.getElementById("confirmSetup").addEventListener("click", async function() {
+
+    var code = document.getElementById("setupCode").value.trim();
+
+    var result = await verifyEnrollment(factorId, code);
+
+    if (result.ok) {
+        location.href = "panel.html";
+    } else {
+        document.getElementById("error").textContent = result.error;
+    }
+
+});
+
+
+// VERIFICAR CÓDIGO MFA
+document.getElementById("verifyButton").addEventListener("click", async function() {
+
+    var code = document.getElementById("mfaCode").value.trim();
+
+    var result = await verifyMFA(factorId, challengeId, code);
+
+    if (result.ok) {
+        location.href = "panel.html";
+    } else {
+        document.getElementById("error").textContent = result.error;
+    }
+
+});
+
+</script>
 
 </body>
 </html>
+```
