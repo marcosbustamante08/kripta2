@@ -1,12 +1,11 @@
-// Configuración de la web de Kripta
-// TODO: mover estas claves al servidor antes de producción
-const CONFIG = {
-  apiUrl: "https://api.kripta.test/v1",
-  apiKey: "kr_live_FAKE_9f8e7d6c5b4a3210",
-  emailServiceToken: "SG.FAKE-TOKEN-DEMO-ONLY",
-  storageKeyId: "AKIAFAKEDEMO000000",
-  storageSecret: "fake/Secret+Key/DemoOnly0000000000000000",
-  dbHost: "db.kripta.test",
-  dbUser: "kripta_admin",
-  dbPassword: "Kripta2024!"
-};
+
+// Configuración de Supabase - Krypta
+
+const SUPABASE_URL = "https://jzsubncsraouxliwfxpn.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_h36FkfLGWoyQ4wXgPdsBBQ_VYJzo3Hs";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
