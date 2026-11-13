@@ -18,13 +18,14 @@
     <button class="btn" type="submit">Entrar</button>
   </form>
 </div></div>
+<!-- Biblioteca de Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Configuración -->
+<script src="../js/config.js"></script>
+
+<!-- Sistema de autenticación -->
 <script src="../js/auth.js"></script>
-<script>
-document.getElementById("f").addEventListener("submit", function(e){
-  e.preventDefault();
-  const r = login(document.getElementById("email").value.trim(), document.getElementById("pw").value);
-  if (r.ok) location.href = "panel.html";
-  else document.getElementById("error").textContent = r.error;
-});
-</script>
-</body></html>
+
+</body>
+</html>
