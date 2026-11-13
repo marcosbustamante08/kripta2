@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acceso interno | Kripta</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/app.css"></head>
+<body>
+<div class="demo">Web ficticia con fines educativos. Todos los datos son inventados.</div>
+<div class="auth"><div class="card">
+  <div class="logo">Kripta</div>
+  <h1>Acceso interno</h1>
+  <p>Solo personal autorizado.</p>
+  <form id="f">
+    <label for="email">Correo corporativo</label>
+    <input id="email" type="email" autocomplete="username" required>
+    <label for="pw">Contraseña</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <div id="error" role="alert"></div>
+    <button class="btn" type="submit">Entrar</button>
+  </form>
+</div></div>
+<script src="../js/auth.js"></script>
+<script>
+document.getElementById("f").addEventListener("submit", function(e){
+  e.preventDefault();
+  const r = login(document.getElementById("email").value.trim(), document.getElementById("pw").value);
+  if (r.ok) location.href = "panel.html";
+  else document.getElementById("error").textContent = r.error;
+});
+</script>
+</body></html>

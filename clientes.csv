@@ -1,0 +1,6 @@
+empresa,contacto,email,telefono,nif,iban,contrato_eur,usuario_portal,password_md5
+Banco Ejemplo S.A.,Laura Mora,laura.mora@bancoejemplo.test,+34 600 111 001,A00000001,ES00 0000 0000 0000 0000 0001,42000,lmora,7c6a180b36896a0a8c02787eeafb0e4c
+Logística Norte,Pau Vidal,pau.vidal@logisticanorte.test,+34 600 111 002,B00000002,ES00 0000 0000 0000 0000 0002,18500,pvidal,7ddf502730c7af3cbd6f0f5551861406
+Clínica Sol,Marta Ruiz,marta.ruiz@clinicasol.test,+34 600 111 003,B00000003,ES00 0000 0000 0000 0000 0003,12000,mruiz,63969696de0fde2732ac050443d8914a
+Aseguradora Mediterránea,Jordi Pons,jordi.pons@mediterranea.test,+34 600 111 004,A00000004,ES00 0000 0000 0000 0000 0004,36000,jpons,d8578edf8458ce06fbc5bb76a58c5ca4
+Tienda Verde,Ana Gil,ana.gil@tiendaverde.test,+34 600 111 005,B00000005,ES00 0000 0000 0000 0000 0005,6800,agil,23e8cef01e4afae4761a09bd5cad9fb0

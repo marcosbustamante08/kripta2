@@ -1,0 +1,29 @@
+:root{--paper:#eef1f4;--ink:#14202b;--teal:#0f6b6b;--brass:#b58b2a;--white:#fff;--muted:#53626f;--red:#a8321f}
+@media(prefers-color-scheme:dark){:root{--paper:#0f1a22;--ink:#e8edf1;--teal:#4fc0b8;--brass:#d9b25a;--white:#16252f;--muted:#9aacb8;--red:#ff8a74}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,system-ui,sans-serif;line-height:1.55}
+.logo{font-family:"Instrument Serif",Georgia,serif;font-size:1.9rem}
+.demo{background:var(--brass);color:#14202b;text-align:center;padding:6px;font-size:.85rem;font-weight:600}
+.auth{min-height:calc(100vh - 32px);display:grid;place-items:center;padding:24px}
+.card{background:var(--white);border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);padding:36px;width:100%;max-width:400px}
+.card h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:2rem;margin:8px 0 4px}
+.card p{color:var(--muted);margin:0 0 20px}
+label{display:block;font-weight:600;font-size:.92rem;margin-bottom:4px}
+input{width:100%;padding:12px;margin-bottom:14px;border:1px solid color-mix(in srgb,var(--ink) 35%,transparent);background:var(--paper);color:var(--ink);font:inherit;border-radius:2px}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.btn{display:inline-block;width:100%;padding:13px;background:var(--ink);color:var(--paper);border:0;font:inherit;font-weight:800;text-align:center;text-decoration:none;cursor:pointer;border-radius:2px}
+.btn.small{width:auto;padding:9px 16px;font-size:.9rem}
+#error{color:var(--red);font-weight:600;min-height:1.5em;margin:0 0 8px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:16px 6vw;border-bottom:1px solid color-mix(in srgb,var(--ink) 15%,transparent)}
+.top span{color:var(--muted);margin-right:16px;font-size:.92rem}
+main.panel{padding:5vh 6vw;max-width:1200px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:36px}
+.kpis div{background:var(--white);padding:18px;border-left:4px solid var(--teal)}
+.kpis b{display:block;font-size:1.8rem}
+.kpis small{color:var(--muted)}
+h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:1.8rem;margin:32px 0 12px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--white)}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid color-mix(in srgb,var(--ink) 14%,transparent);font-size:.93rem;white-space:nowrap}
+th{color:var(--muted);font-weight:600}
+.box{background:var(--white);padding:20px;border-left:4px solid var(--brass)}
