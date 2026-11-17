@@ -1,81 +1,211 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Panel | Kripta</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="../assets/app.css">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../js/config.js"></script>
-<script src="../js/auth.js"></script>
+
 </head>
+
 <body>
-<div class="demo">Web ficticia con fines educativos. Todos los datos son inventados.</div>
-<div class="top">
-  <div class="logo">Kripta <small style="font-size:.9rem;color:var(--muted)">panel interno</small></div>
-  <div><span id="who"></span><button class="btn small" onclick="logout()">Cerrar sesión</button></div>
+
+<div class="demo">
+Web ficticia con fines educativos. Todos los datos son inventados.
 </div>
-<main class="panel">
-  <div class="kpis">
-    <div><b>8</b><small>Clientes activos</small></div>
-    <div><b>3</b><small>Auditorías en curso</small></div>
-    <div><b>5</b><small>Informes pendientes de firma</small></div>
-    <div><b>184.500 €</b><small>Facturación del trimestre</small></div>
-  </div>
 
-  <h2>Clientes</h2>
-  <div class="scroll"><table>
-    <tr><th>Empresa</th><th>Contacto</th><th>Correo</th><th>Teléfono</th><th>Contrato</th><th>Estado</th></tr>
-    <tr><td>Banco Ejemplo S.A.</td><td>Laura Mora</td><td>laura.mora@bancoejemplo.test</td><td>+34 600 111 001</td><td>42.000 €</td><td>En curso</td></tr>
-    <tr><td>Logística Norte</td><td>Pau Vidal</td><td>pau.vidal@logisticanorte.test</td><td>+34 600 111 002</td><td>18.500 €</td><td>Informe entregado</td></tr>
-    <tr><td>Clínica Sol</td><td>Marta Ruiz</td><td>marta.ruiz@clinicasol.test</td><td>+34 600 111 003</td><td>12.000 €</td><td>Pendiente de firma</td></tr>
-    <tr><td>Aseguradora Mediterránea</td><td>Jordi Pons</td><td>jordi.pons@mediterranea.test</td><td>+34 600 111 004</td><td>36.000 €</td><td>En curso</td></tr>
-    <tr><td>Tienda Verde</td><td>Ana Gil</td><td>ana.gil@tiendaverde.test</td><td>+34 600 111 005</td><td>6.800 €</td><td>Informe entregado</td></tr>
-  </table></div>
+<div class="top">
 
-  <h2>Informes recientes</h2>
-  <div class="scroll"><table>
-    <tr><th>Informe</th><th>Cliente</th><th>Riesgo</th><th>Fecha</th></tr>
-    <tr><td>Pentest aplicación de banca online</td><td>Banco Ejemplo S.A.</td><td>Crítico</td><td>03/11/2026</td></tr>
-    <tr><td>Revisión de red perimetral</td><td>Logística Norte</td><td>Medio</td><td>21/10/2026</td></tr>
-    <tr><td>Auditoría RGPD historiales</td><td>Clínica Sol</td><td>Alto</td><td>09/10/2026</td></tr>
-  </table></div>
-
-  <section id="backups" style="display:none">
-    <h2>Copias de seguridad (solo administradores)</h2>
-    <div class="box">
-      <p style="margin-top:0">Última exportación completa de clientes y accesos al portal.</p>
+    <div class="logo">
+        Kripta
+        <small style="font-size:.9rem;color:var(--muted)">
+            panel interno
+        </small>
     </div>
-  </section>
+
+    <div>
+        <span id="who"></span>
+        <button class="btn small" onclick="logout()">
+            Cerrar sesión
+        </button>
+    </div>
+
+</div>
+
+<main class="panel">
+
+    <div class="kpis">
+
+        <div>
+            <b>8</b>
+            <small>Clientes activos</small>
+        </div>
+
+        <div>
+            <b>3</b>
+            <small>Auditorías en curso</small>
+        </div>
+
+        <div>
+            <b>5</b>
+            <small>Informes pendientes de firma</small>
+        </div>
+
+        <div>
+            <b>184.500 €</b>
+            <small>Facturación del trimestre</small>
+        </div>
+
+    </div>
+
+    <h2>Clientes</h2>
+
+    <div class="scroll">
+        <table>
+
+            <tr>
+                <th>Empresa</th>
+                <th>Contacto</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Contrato</th>
+                <th>Estado</th>
+            </tr>
+
+            <tr>
+                <td>Banco Ejemplo S.A.</td>
+                <td>Laura Mora</td>
+                <td>laura.mora@bancoejemplo.test</td>
+                <td>+34 600 111 001</td>
+                <td>42.000 €</td>
+                <td>En curso</td>
+            </tr>
+
+            <tr>
+                <td>Logística Norte</td>
+                <td>Pau Vidal</td>
+                <td>pau.vidal@logisticanorte.test</td>
+                <td>+34 600 111 002</td>
+                <td>18.500 €</td>
+                <td>Informe entregado</td>
+            </tr>
+
+            <tr>
+                <td>Clínica Sol</td>
+                <td>Marta Ruiz</td>
+                <td>marta.ruiz@clinicasol.test</td>
+                <td>+34 600 111 003</td>
+                <td>12.000 €</td>
+                <td>Pendiente de firma</td>
+            </tr>
+
+            <tr>
+                <td>Aseguradora Mediterránea</td>
+                <td>Jordi Pons</td>
+                <td>jordi.pons@mediterranea.test</td>
+                <td>+34 600 111 004</td>
+                <td>36.000 €</td>
+                <td>En curso</td>
+            </tr>
+
+            <tr>
+                <td>Tienda Verde</td>
+                <td>Ana Gil</td>
+                <td>ana.gil@tiendaverde.test</td>
+                <td>+34 600 111 005</td>
+                <td>6.800 €</td>
+                <td>Informe entregado</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <h2>Informes recientes</h2>
+
+    <div class="scroll">
+        <table>
+
+            <tr>
+                <th>Informe</th>
+                <th>Cliente</th>
+                <th>Riesgo</th>
+                <th>Fecha</th>
+            </tr>
+
+            <tr>
+                <td>Pentest aplicación de banca online</td>
+                <td>Banco Ejemplo S.A.</td>
+                <td>Crítico</td>
+                <td>03/11/2026</td>
+            </tr>
+
+            <tr>
+                <td>Revisión de red perimetral</td>
+                <td>Logística Norte</td>
+                <td>Medio</td>
+                <td>21/10/2026</td>
+            </tr>
+
+            <tr>
+                <td>Auditoría RGPD historiales</td>
+                <td>Clínica Sol</td>
+                <td>Alto</td>
+                <td>09/10/2026</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <section id="backups" style="display:none">
+
+        <h2>Copias de seguridad (solo administradores)</h2>
+
+        <div class="box">
+            <p style="margin-top:0">
+                Última exportación completa de clientes y accesos al portal.
+            </p>
+        </div>
+
+    </section>
+
 </main>
+
 <script>
-<script>
+
+// Comprobar si existe una sesión iniciada
 async function protectPanel() {
 
-    // Comprobar si existe una sesión
-    var session = await getSession();
+    var result = await supabaseClient.auth.getSession();
 
-    if (!session) {
+    if (result.error || !result.data.session) {
         location.replace("login.html");
         return;
     }
 
-    // Comprobar si se ha completado el segundo factor
-    var assurance = await supabaseClient.auth.mfa
-        .getAuthenticatorAssuranceLevel();
-
-    if (assurance.error ||
-        assurance.data.currentLevel !== "aal2") {
-
-        location.replace("login.html");
-        return;
-    }
-
-    // Mostrar información del usuario
     document.getElementById("who").textContent =
-        session.user.email + " (usuario autenticado)";
-  
+        result.data.session.user.email;
+
+}
+
+// Cerrar sesión
+async function logout() {
+
+    await supabaseClient.auth.signOut();
+
+    location.replace("login.html");
+
 }
 
 protectPanel();
+
 </script>
-</script>
-</body></html>
+
+</body>
+</html>
